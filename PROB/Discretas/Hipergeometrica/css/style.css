@@ -1,0 +1,7 @@
+body {
+    background: #888888;
+}
+#chartdiv {
+  width: 100%;
+  height: 300px;
+}

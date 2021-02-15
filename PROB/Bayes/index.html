@@ -1,0 +1,301 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Teorema de Bayes</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" href="http://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!--JS-->
+    <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="http://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="http://d3js.org/d3.v6.min.js"></script>
+
+    <script src="http://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="http://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="http://cdn.amcharts.com/lib/4/plugins/venn.js"></script>
+    <script src="http://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="fluid-container">
+        <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+            <a class="navbar-brand" href="../index.html">Problemas de probabilidad</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a class="nav-link" href="../Bayes/index.html">Teorema de Bayes </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="discret" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Distribuciones discretas
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="discret">
+                            <a class="dropdown-item" href="../Discretas/Binomial/index.html">Binomial</a>
+                            <a class="dropdown-item" href="../Discretas/Geometrica/index.html">Geométrica</a>
+                            <a class="dropdown-item" href="../Discretas/Hipergeometrica/index.html">Hipergeométrica</a>
+                            <a class="dropdown-item" href="../Discretas/BinomialNeg/index.html">Binomial negativa</a>
+                            <a class="dropdown-item" href="../Discretas/Poisson/index.html">Poisson</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="continue" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Distribuciones continuas
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="continue">
+                            <a class="dropdown-item" href="#">--</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="card mx-4">
+            <div class="row">
+                <div class="col-9">
+                    <div class="card-body">
+                        <small>
+                            Elaborado por: Jorge Alberto Galeano Vélez, Cod: 20172020060 <br>
+                            Curso de Probabilidad 425-81<br>
+                            Profesor: Fernando León <br>
+                            Periodo: 2020-3
+                        </small>
+                        <h5 class="card-title mt-3">Teorema de Bayes</h5>
+                        <small>Autor desconocido</small>
+                        <p>
+                            Un ingeniero cree que hay una posibilidad \(P(E)\) de que extraterrestres del
+                            planeta
+                            Kepler-452b estén tratando de comunicarse con nosotros mediante mensajes de alta frecuencia
+                            a la
+                            tierra.
+                        </p>
+                        <p>
+                            El ingeniero pretende captar las señales con un equipo que garantiza la detección con una
+                            probabilidad \(P(R|E)\). Sin embargo, si los extraterrestres no están enviando
+                            señales, la probabilidad de que el equipo parezca detectar señales es de
+                            \(P(R|E')\).
+                        </p>
+                        <p>
+                            Si el equipo detecta señales. ¿Cuál es la probabilidad de que en realidad las estén enviando
+                            los extraterrestres de Kepler-452b?
+                        </p>
+
+                        <div class="row">
+                            <div class="col-3">
+                                <p>
+                                    <a class="btn badge badge-secondary rounded-pill px-2 py-1"
+                                        style="border:solid 1px #000;" data-toggle="collapse" href="#collapseE"
+                                        role="button" aria-expanded="false" aria-controls="collapseE">
+                                        S
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseE">
+                                    <div class="card card-body">
+                                        Conjunto de todos los eventos. (Espacio muestral)
+                                    </div>
+                                </div>
+                                <p>
+                                    <a class="btn badge badge-primary rounded-pill px-2 py-1"
+                                        style="border:solid 1px #000;" data-toggle="collapse" href="#collapseE"
+                                        role="button" aria-expanded="false" aria-controls="collapseE">
+                                        E
+                                    </a>
+                                    = <img src="img/sne.png">
+                                </p>
+                                <div class="collapse" id="collapseE">
+                                    <div class="card card-body">
+                                        Evento en que se envían señales desde Kepler-452b.
+                                    </div>
+                                </div>
+                                <p>
+                                    <a class="btn badge badge-warning rounded-pill px-2 py-1"
+                                        style="border:solid 1px #000;" data-toggle="collapse" href="#collapseEP"
+                                        role="button" aria-expanded="false" aria-controls="collapseEP">
+                                        E'
+                                    </a>
+                                    = <img src="img/ep.png">
+                                </p>
+                                <div class="collapse" id="collapseEP">
+                                    <div class="card card-body">
+                                        Evento en que no se envían señales desde Kepler-452b.
+                                    </div>
+                                </div>
+                                <p>
+                                    <a class="btn badge badge-danger rounded-pill px-2 py-1"
+                                        style="border:solid 1px #000;" data-toggle="collapse" href="#collapseR"
+                                        role="button" aria-expanded="false" aria-controls="collapseR">
+                                        R
+                                    </a>
+                                    = <img src="img/snr.png">
+                                </p>
+                                <div class="collapse" id="collapseR">
+                                    <div class="card card-body">
+                                        Evento en que la máquina parece detectar señales.
+                                    </div>
+                                </div>
+                                <p>
+                                    <a class="btn badge rounded-pill px-2 py-1" style="border:solid 1px #000;"
+                                        data-toggle="collapse" href="#collapseRP" role="button" aria-expanded="false"
+                                        aria-controls="collapseRP">
+                                        R'
+                                    </a>
+                                    = <img src="img/rp.png">
+                                </p>
+                                <div class="collapse" id="collapseRP">
+                                    <div class="card card-body">
+                                        Evento en que la máquina parece no detectar señales.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <p>
+                                    <a class="btn badge rounded-pill px-2 py-1"
+                                        style="border:solid 1px #000;background:#AE00FF;color:#FFF"
+                                        data-toggle="collapse" href="#collapseR_E" role="button" aria-expanded="false"
+                                        aria-controls="collapseR_E">
+                                        R|E
+                                    </a>
+                                    = <img src="img/enr.png">
+                                </p>
+                                <div class="collapse" id="collapseR_E">
+                                    <div class="card card-body">
+                                        Evento en que dado que se esten enviando señales de Kepler-452b, la máquina
+                                        parece
+                                        detectar señales.
+                                    </div>
+                                </div>
+                                <p>
+                                    <a class="btn badge badge-dark rounded-pill px-2 py-1"
+                                        style="border:solid 1px #000;" data-toggle="collapse" href="#collapseRP_E"
+                                        role="button" aria-expanded="false" aria-controls="collapseRP_E">
+                                        R'|E
+                                    </a>
+                                    = <img src="img/enrp.png">
+                                </p>
+                                <div class="collapse" id="collapseRP_E">
+                                    <div class="card card-body">
+                                        Evento en que dado que se esten enviando señales de Kepler-452b, la máquina no
+                                        parece
+                                        detectar señales.
+                                    </div>
+                                </div>
+                                <p>
+                                    <a class="btn badge rounded-pill px-2 py-1"
+                                        style="border:solid 1px #000;background:#FF7C00;color:#FFF"
+                                        data-toggle="collapse" href="#collapseR_EP" role="button" aria-expanded="false"
+                                        aria-controls="collapseR_EP">
+                                        R|E'
+                                    </a>
+                                    = <img src="img/epnr.png">
+                                </p>
+                                <div class="collapse" id="collapseR_EP">
+                                    <div class="card card-body">
+                                        Evento en que dado que no se esten enviando señales de Kepler-452b, la máquina
+                                        parece
+                                        detectar señales.
+                                    </div>
+                                </div>
+                                <p>
+                                    <a class="btn badge badge-dark rounded-pill px-2 py-1"
+                                        style="border:solid 1px #000;" data-toggle="collapse" href="#collapseRP_EP"
+                                        role="button" aria-expanded="false" aria-controls="collapseRP_EP">
+                                        R'|E'
+                                    </a>
+                                    = <img src="img/epnrp.png">
+                                </p>
+                                <div class="collapse" id="collapseRP_EP">
+                                    <div class="card card-body">
+                                        Evento en que dado que no se esten enviando señales de Kepler-452b, la máquina
+                                        no parece
+                                        detectar señales.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Valores iniciales</h5>
+                        Ingrese valores entre 0 y 1 con hasta 2 decimales para:
+                        <div class="form-group">
+                            <label for="valueE" class="col-form-label">
+                                \(P(E)\)
+                            </label>
+                            <input type="number" class="form-control" id="valueE" min="0" max="1" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="valueR_E" class="col-form-label">
+                                \(P(R|E)\)
+                            </label>
+                            <input type="number" class="form-control" id="valueR_E" min="0" max="1" step="0.01"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="valueR_EP" class="col-form-label">
+                                \(P(R|E')\)
+                            </label>
+                            <input type="number" class="form-control" id="valueR_EP" min="0" max="1" step="0.01"
+                                required>
+                        </div>
+                        <input type="button" class="btn btn-primary" id="calculate" value="Calcular"
+                            onclick="setValues()">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mx-4" id="answer">
+        <div class="row">
+            <div class="col-5">
+                <div class="card-body">
+                    <h5 class="card-title">Árbol</h5>
+                    <div class="tree pl-5 ml-5">
+                        <ul id="ulTree">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-7">
+                <div class="card-body">
+                    <p>
+                        Ya que E y E' son eventos colectivamente exhaustivos y tambien son eventos mutuamente
+                        excluyentes
+                        entonces cada uno es una partición del espacio muestral S.
+                    </p>
+                    <p>
+                        Además R es un subconjunto de S compuesto por <img src="img/composicion.png">
+                    </p>
+                    <h5 class="card-title">Teorema de Bayes</h5>
+                    <img src="img/bayes.png" class="mb-2">
+                    <p>
+                        La probabilidad de que si se detectan señales estas provengan de Kepler-452b es <strong
+                            id='res'>0</strong> equivalente al <strong id='resP'>0</strong> de R
+                    </p>
+                    <small>Basado en Wackerly, Mendenhall, Scheaffer. (2010). Estadística matemática con aplicaciones,
+                        septima edición. Cengage learning, México. p. 69 - 70. </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mx-4" id="venn">
+        <div class="card-body">
+            <h5 class="card-title">Diagrama de Venn</h5>
+            <div id="chartdiv"></div>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Distribución de Poisson</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" href="http://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!--JS-->
+    <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="http://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="http://d3js.org/d3.v6.min.js"></script>
+
+    <script src="http://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="http://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="http://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <div class="fluid-container">
+        <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+            <a class="navbar-brand" href="../../index.html">Problemas de probabilidad</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a class="nav-link" href="../../Bayes/index.html">Teorema de Bayes </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="discret" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Distribuciones discretas
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="discret">
+                            <a class="dropdown-item" href="../../Discretas/Binomial/index.html">Binomial</a>
+                            <a class="dropdown-item" href="../../Discretas/Geometrica/index.html">Geométrica</a>
+                            <a class="dropdown-item" href="../../Discretas/Hipergeometrica/index.html">Hipergeométrica</a>
+                            <a class="dropdown-item" href="../../Discretas/BinomialNeg/index.html">Binomial negativa</a>
+                            <a class="dropdown-item" href="../../Discretas/Poisson/index.html">Poisson</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="continue" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Distribuciones continuas
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="continue">
+                            <a class="dropdown-item" href="#">--</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="card mx-4">
+            <div class="card-body">
+                <small>
+                    Elaborado por: Jorge Alberto Galeano Vélez, Cod: 20172020060 <br>
+                    Curso de Probabilidad 425-81<br>
+                    Profesor: Fernando León <br>
+                    Periodo: 2020-3
+                </small>
+                <h5 class="card-title mt-3">Distribución de Poisson</h5>
+
+                <small>
+                    Basado en un ejemplo de Introducción a la probabilidad y estadística. Mendenhall,
+                    Beaver, Beaver.
+                    Decimo tercera edición. Cengage Learning, México 2006. p. 197.
+                </small>
+                <p class=" mt-3">Una distribución puede considerarse distribución de Poisson si cumple las siguientes
+                    características:</p>
+                <div class="row">
+                    <div class="col-6">
+                        <ul>
+                            <li>
+                                La variable discreta aleatoria \(X\) es el <strong class="text-primary">número
+                                    de veces que ocurre un evento</strong> <strong class="text-danger">durante un
+                                    intervalo
+                                    definido</strong>.
+                            </li>
+                            <li>
+                                La probabilidad de ocurrencia es la misma para cualesquiera dos intervalos de igual
+                                longitud.
+                            </li>
+                            <li>
+                                La ocurrencia o no ocurrencia en cualquier intervalo es independiente de la ocurrencia o
+                                no
+                                ocurrencia en cualquier intervalo.
+                            </li>
+                            <li>
+                                Dos eventos no ocurren exactamente al mismo tiempo.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <ul>
+                            <li>
+                                La media o el valor esperado de ocurrencias \(\mu\) es mayor que 0.
+                            </li>
+                            <li>
+                                \(x\) es un número de ocurrencias posibles a evaluar.
+                            </li>
+                        </ul>
+                        <p>
+                            Y su función de probabilidad es
+                        </p>
+                        <p>
+                            \(f(x)=P(X=x)=\dfrac{e^{-\mu}\mu^x}{x!}\)</p>
+
+                    </div>
+                </div>
+                <hr>
+                <h6 class="card-title">Ejemplo</h6>
+                <small>Adaptado de un ejemplo de Wackerly, Mendenhall, Scheaffer. (2010). Estadística matemática con
+                    aplicaciones, septima edición. Cengage learning, México. p. 136.</small>
+                <div class="row mt-3">
+                    <div class="col-6">
+                        <p>
+                            Llegan clientes a un mostrador de una tienda siguiendo una distribución de Poisson, a un
+                            promedio de <strong class="text-primary">siete</strong>
+                            <strong class="text-danger">por hora.</strong>
+                            Durante una hora determinada,
+                            ¿Cuáles son las probabilidades de que lleguen exactamente cinco clientes?
+                        </p>
+                        <p>
+                            \(\mu\)= 7 &nbsp;&nbsp;&nbsp; \(x\)= 5
+                        </p>
+                        <p>
+                            \(f(5)=P(X=5)=\dfrac{e^{-7}7^5}{5!}\)
+                        </p>
+                        <p>La probabilidad es <strong>0.1277 = 12.77%</strong></p>
+                        <hr>
+                        <p>¿Cuáles son las probabilidades de que lleguen máximo dos clientes?</p>
+                        <p>
+                            \(P(X \leq 2)=P(X=0)+P(X=1)+P(X=2)\)
+                        </p>
+                        <p>
+                            \(P(X \leq 2)=\sum_{i=0}^2P(X=i)\)
+                        </p>
+                        <p>La probabilidad es <strong>0.0296 = 2.96%</strong></p>
+                        <hr>
+                    </div>
+                    <div class="col-6">
+                        <p>¿Cuáles son las probabilidades de que lleguen al menos tres clientes?</p>
+                        <p>Considferando que la suma de todas las probabilidades es igual a 1</p>
+                        <p>
+                            \(\sum_{i=0}^\infty P(X=i) = 1\)
+                        </p>
+                        <p>y teniendo en cuenta que necesitammos contar con la probabilidad de que llegue cualquier
+                            número de personas mayor o igual a 3</p>
+                        <p>
+                            \(P(X \geq 3)=P(X=3)+P(X=4)+P(X=5)+\cdots\)
+                        </p>
+                        <p>
+                            \(P(X \geq 3)=\sum_{i=3}^\infty P(X=i)\)
+                        </p>
+                        <p>El problema se puede solucionar, operando el complemento de la operación y restandolo del
+                            total de la suma</p>
+                        <p>
+                            \(P(X \geq 3)=\sum_{i=0}^\infty P(X=i) - \sum_{i=0}^2 P(X=i)\)
+                        </p>
+                        <p>
+                            \(P(X \geq 3)=1 - \sum_{i=0}^2 P(X=i)\)
+                        </p>
+                        <p>La probabilidad es <strong>0.9704 = 97.04%</strong></p>
+                    </div>
+                </div>
+                <h5 class="card-title">Calculadora de Poisson</h5>
+                <div class="row">
+                    <div class="col-6">
+                        A continuación puede calcular y ver la gráfica de la función de Poisson para un
+                        \(\mu\) especifico. Por facilidad del algoritmo, se aceptan valores máximos de 100.
+                        <div class="form-group">
+                            <label for="valueMi" class="col-form-label">
+                                \(\mu\) (entero mayor que 0)
+                            </label>
+                            <input type="number" class="form-control" id="valueMi" min="1" step="1" max="100" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="valueX" class="col-form-label">
+                                \(x\) (entero igual o mayor que 0)
+                            </label>
+                            <input type="number" class="form-control" id="valueX" min="0" step="1" max="100" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="valueOperator" class="col-form-label">
+                                Operador
+                            </label>
+                            <select id="valueOperator" class="form-control" onchange="showGuide()">
+                                <option value="eq">igual a</option>
+                                <option value="geq">mayor o igual a</option>
+                                <option value="leq">menor o igual a</option>
+                                <option value="more">mayor a</option>
+                                <option value="less">menor a </option>
+                            </select>
+                        </div>
+                        <p id="eqGuide">\(P(X = x)\)</p>
+                        <p id="geqGuide">\(P(X \geq x)\)</p>
+                        <p id="leqGuide">\(P(X \leq x)\)</p>
+                        <p id="moreGuide">\(P(X > x)\)</p>
+                        <p id="lessGuide">\(P(X < x)\)</p>
+                                <input type="button" class="btn btn-primary" id="calculate" value="Calcular"
+                                    onclick="setValues()"><br><br>
+                                <p>
+                                    <span id="eqAns">\(P(X = x) =\)</span>
+                                    <span id="geqAns">\(P(X \geq x) =\)</span>
+                                    <span id="leqAns">\(P(X \leq x) =\)</span>
+                                    <span id="moreAns">\(P(X > x) =\)</span>
+                                    <span id="lessAns">\(P(X < x)=\)</span> <strong id="res"></strong>
+                                </p>
+
+                    </div>
+                    <div class="col-6">
+                        <div id="chartdiv" style="height:400px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
