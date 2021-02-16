@@ -1,0 +1,12 @@
+body {
+    background: #888888;
+}
+
+.rigth-column {
+    border-left: solid 1px black;
+}
+
+#chartdiv {
+    width: 100%;
+    height: 500px;
+}
