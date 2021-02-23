@@ -55,7 +55,7 @@
                             Distribuciones continuas
                         </a>
                         <div class="dropdown-menu" aria-labelledby="continue">
-                            <a class="dropdown-item" href="#">--</a>
+                            <a class="dropdown-item" href="../../Continuas/Normal/index.html">Normal</a>
                         </div>
                     </li>
                 </ul>
@@ -95,21 +95,52 @@
                         <p>
                             Una urna contiene \(N\) canicas, de las cuales \(r\) son blancas y las demás son negras.
                             \(n\) canicas se van a sacar de la urna, una a la vez sin reemplazo.
-                            ¿Cuál es la probabilidad de que del numero de canicas blancas sea
+                            ¿Cuál es la probabilidad de que del numero de canicas blancas sea una cantidad determinada.
                         
                     </div>
+                    <p>
+                        Asigne valores a las variables para calcular el resultado
+                    </p>
                     <div class="row">
-                        <div class="col-6">
-                            <p>
-                                Asigne valores a las variables para calcular el resultado
-                            </p>
+                        <div class="col-3">
+    
                             <div class="form-group">
+                                <label for="valueY" class="col-form-label">
+                                    \(y\) (cantidad de aciertos)
+                                </label>
+                                <input type="number" class="form-control" id="valueY" min="1" step="1" max="100" required>
+                            </div>
+    
+                            <div class="form-group">
+                                <label for="valueBigN" class="col-form-label">
+                                    \(N\) (tamaño de la población)
+                                </label>
+                                <input type="number" class="form-control" id="valueBigN" min="1" step="1" max="100" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="valueN" class="col-form-label">
+                                    \(n\) (tamaño de la muestra)
+                                </label>
+                                <input type="number" class="form-control" id="valueN" min="1" step="1" max="100" required>
+                            </div>
+    
+                            <div class="form-group">
+                                <label for="valueR" class="col-form-label">
+                                    \(r\) (cantidad de elementos que cumplen la característica deseada)
+                                </label>
+                                <input type="number" class="form-control" id="valueR" min="1" step="1" max="100" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="valueOperator" class="col-form-label">
+                                    Relación de probabilidad
+                                </label>
                                 <select id="valueOperator" class="form-control" onchange="showGuide()">
-                                    <option value="eq">... igual a y</option>
-                                    <option value="geq">... mayor o igual a y</option>
-                                    <option value="leq">... menor o igual a y</option>
-                                    <option value="more">... mayor a y</option>
-                                    <option value="less">... menor a y</option>
+                                    <option value="eq">Igual a y</option>
+                                    <option value="geq">Mayor o igual a y</option>
+                                    <option value="leq">Menor o igual a y</option>
+                                    <option value="more">Mayor a y</option>
+                                    <option value="less">Menor a y</option>
                                 </select>
                             </div>
     
@@ -118,57 +149,16 @@
                             <p id="leqGuide">\(P(Y \leq y)\)</p>
                             <p id="moreGuide">\(P(Y > y)\)</p>
                             <p id="lessGuide">\(P(Y < y)\)</p>
-    
-                        </div>
-                        <div class="col-6">
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="valueBigN" class="col-form-label">
-                                    \(N\) (tamaño de la población)
-                                </label>
-                                <input type="number" class="form-control" id="valueBigN" min="1" step="1" max="100" required>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="valueN" class="col-form-label">
-                                    \(n\) (tamaño de la muestra)
-                                </label>
-                                <input type="number" class="form-control" id="valueN" min="1" step="1" max="100" required>
-                            </div>
-    
-                        </div>
-                        <div class="col-6">
-    
-                            <div class="form-group">
-                                <label for="valueR" class="col-form-label">
-                                    \(r\) (cantidad de elementos que cumplen la característica deseada)
-                                </label>
-                                <input type="number" class="form-control" id="valueR" min="1" step="1" max="100" required>
-                            </div>
-                        </div>
-                        <div class="col-6">
-    
-                            <div class="form-group">
-                                <label for="valueY" class="col-form-label">
-                                    \(y\) (cantidad de aciertos)
-                                </label>
-                                <input type="number" class="form-control" id="valueY" min="1" step="1" max="100" required>
-                            </div>
-                        </div>
-                        <div class="col-6">
                             <input type="button" class="btn btn-primary" id="calculate" value="Calcular"
                                 onclick="setValues()"><br><br>
                         </div>
+                        <div class="col-9">
+                            <div id="chartdiv"></div>
+                        </div>
                     </div>
                     <div>
-                        <p>
-                            $$P(Y=y)= \displaystyle\binom{n}{y} p^{y} (1-p)^{n-y}$$
-                        </p>
                         <p id="eq">
                         </p>
-                        <div id="chartdiv"></div>
                     </div>
             </div>
         </div>

@@ -55,7 +55,7 @@
                             Distribuciones continuas
                         </a>
                         <div class="dropdown-menu" aria-labelledby="continue">
-                            <a class="dropdown-item" href="#">--</a>
+                            <a class="dropdown-item" href="../../Continuas/Normal/index.html">Normal</a>
                         </div>
                     </li>
                 </ul>
@@ -70,7 +70,9 @@
                     Periodo: 2020-3
                 </small>
                 <h5 class="card-title mt-3">Distribución binomial negativa</h5>
-                <small>Basado en <a href="https://proyectodescartes.org/iCartesiLibri/materiales_didacticos/EstadisticaProbabilidadInferencia/VAdiscreta/4_4DistribucionBinomialNegativa.html">Red educativa digital Descartes</a></small>
+                <small>Basado en <a
+                        href="https://proyectodescartes.org/iCartesiLibri/materiales_didacticos/EstadisticaProbabilidadInferencia/VAdiscreta/4_4DistribucionBinomialNegativa.html">Red
+                        educativa digital Descartes</a></small>
                 <div class="mt-3">
                     <p>
                         Un experimento binomial presenta las siguientes propiedades:
@@ -81,15 +83,16 @@
                         <li>Los intentos continúan hasta que se consigan \(r\) éxitos.</li>
                         <li>\(y\) es el número de experimentos realizados hasta obtener el \(r\)-ésimo éxito</li>
 
-                        <li>Si \(y\) es menor que \(r\) la función de probabilidad es 0. En otro caso la función de probabilidad es
+                        <li>Si \(y\) es menor que \(r\) la función de probabilidad es 0. En otro caso la función de
+                            probabilidad es
                             $$P(Y=y)= \displaystyle\binom{y-1}{r-1} p^{r} (1-p)^{y-r}$$
                         </li>
                     </ul>
                     <hr>
                     <h6 class="card-title">Ejemplo</h6>
-                    <small>Adaptado de un probelma <del></del> Wackerly, Mendenhall, Scheaffer. (2010). Estadística
+                    <small>Adaptado de un problema de Wackerly, Mendenhall, Scheaffer. (2010). Estadística
                         matemática con
-                        aplicaciones, septima edición. Cengage learning, México. p. 105.
+                        aplicaciones, septima edición. Cengage learning, México. p. 105.</small>
                         <p>
                             Suponga que un lote de fusibles eléctricos tiene una probabilidad de \(p\) de contener
                             piezas defectuosas. Si se prueba una muestra de \(n\) fusibles, encuentre la
@@ -97,18 +100,43 @@
                             que el número de fusibles defectuosos sea...
                         </p>
                 </div>
+                <p>
+                    Asigne valores a las variables para calcular el resultado
+                </p>
                 <div class="row">
-                    <div class="col-6">
-                        <p>
-                            Asigne valores a las variables para calcular el resultado
-                        </p>
+                    <div class="col-3">
+
                         <div class="form-group">
+                            <label for="valueP" class="col-form-label">
+                                \(p\) (probabilidad favorable)
+                            </label>
+                            <input type="number" class="form-control" id="valueP" min="0" step="0.1" max="1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="valueY" class="col-form-label">
+                                \(y\) (cantidad de experimentos)
+                            </label>
+                            <input type="number" class="form-control" id="valueY" min="1" step="1" max="100" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="valueR" class="col-form-label">
+                                \(r\) (exitos esperados)
+                            </label>
+                            <input type="number" class="form-control" id="valueR" min="1" step="1" max="100" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="valueOperator" class="col-form-label">
+                                Relación de probabilidad
+                            </label>
                             <select id="valueOperator" class="form-control" onchange="showGuide()">
-                                <option value="eq">... igual a y</option>
-                                <option value="geq">... mayor o igual a y</option>
-                                <option value="leq">... menor o igual a y</option>
-                                <option value="more">... mayor a y</option>
-                                <option value="less">... menor a y</option>
+                                <option value="eq">Igual a y</option>
+                                <option value="geq">Mayor o igual a y</option>
+                                <option value="leq">Menor o igual a y</option>
+                                <option value="more">Mayor a y</option>
+                                <option value="less">Menor a y</option>
                             </select>
                         </div>
 
@@ -118,44 +146,16 @@
                         <p id="moreGuide">\(P(Y > y)\)</p>
                         <p id="lessGuide">\(P(Y < y)\)</p>
 
+                                <input type="button" class="btn btn-primary" id="calculate" value="Calcular"
+                                    onclick="setValues()"><br><br>
                     </div>
-                    <div class="col-6">
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="valueY" class="col-form-label">
-                                \(y\) (cantidad de experimentos)
-                            </label>
-                            <input type="number" class="form-control" id="valueY" min="1" step="1" max="100" required>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="valueR" class="col-form-label">
-                                \(r\) (exitos esperados)
-                            </label>
-                            <input type="number" class="form-control" id="valueR" min="1" step="1" max="100" required>
-                        </div>
-
-                    </div>
-                    <div class="col-6">
-
-                        <div class="form-group">
-                            <label for="valueP" class="col-form-label">
-                                \(p\) (probabilidad favorable)
-                            </label>
-                            <input type="number" class="form-control" id="valueP" min="0" step="0.1" max="1" required>
-                        </div>
-                        <input type="button" class="btn btn-primary" id="calculate" value="Calcular"
-                            onclick="setValues()"><br><br>
+                    <div class="col-9">
+                        <div id="chartdiv"></div>
                     </div>
                 </div>
                 <div>
-                    <p>
-                        $$P(Y=y)= \displaystyle\binom{y-1}{r-1} p^{r} (1-p)^{y-r}$$
                     <p id="eq">
                     </p>
-                    <div id="chartdiv"></div>
                 </div>
             </div>
         </div>

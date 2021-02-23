@@ -48,7 +48,8 @@ function setValues() {
             case "eq":
 
                 res = calculate(valueP, valueY);
-                $('#eq').html("$$P(Y=" + valueY + ")= (1-" + valueP + ")^{" + valueY + "-1}" + valueP + " = " + res + " = " + (res * 100) + "\\%$$");
+                res = Math.round((res + Number.EPSILON) * 10000) / 10000
+                $('#eq').html("$$P(Y=" + valueY + ")= (1-" + valueP + ")^{" + valueY + "-1} * " + valueP + " = " + res + " = " + (res * 100) + "\\%$$");
                 break;
             case "geq":
                 res = 0;
@@ -59,7 +60,7 @@ function setValues() {
                 }
                 str = str.substr(0, str.length - 1);
                 res = 1 - res;
-                res = Math.round((res + Number.EPSILON) * 100000000) / 100000000
+                res = Math.round((res + Number.EPSILON) * 10000) / 10000
                 $('#eq').html("$$P(Y\\geq" + valueY + ") = 1-(" + str + ") = " + res + " = " + (res * 100) + "\\%$$");
                 break;
             case "leq":
@@ -70,7 +71,7 @@ function setValues() {
                     str += "P(Y=" + i + ")+";
                 }
                 str = str.substr(0, str.length - 1);
-                res = Math.round((res + Number.EPSILON) * 100000000) / 100000000
+                res = Math.round((res + Number.EPSILON) * 10000) / 10000
                 $('#eq').html("$$P(Y\\leq" + valueY + ") = (" + str + ") = " + res + " = " + (res * 100) + "\\%$$");
                 break;
             case "less":
@@ -81,7 +82,7 @@ function setValues() {
                     str += "P(Y=" + i + ")+";
                 }
                 str = str.substr(0, str.length - 1);
-                res = Math.round((res + Number.EPSILON) * 100000000) / 100000000
+                res = Math.round((res + Number.EPSILON) * 10000) / 10000
                 $('#eq').html("$$P(Y<" + valueY + ") = (" + str + ") = " + res + " = " + (res * 100) + "\\%$$");
                 break;
             case "more":
@@ -93,7 +94,7 @@ function setValues() {
                 }
                 str = str.substr(0, str.length - 1);
                 res = 1 - res;
-                res = Math.round((res + Number.EPSILON) * 100000000) / 100000000
+                res = Math.round((res + Number.EPSILON) * 10000) / 10000
                 $('#eq').html("$$P(Y>" + valueY + ") = 1-(" + str + ") = " + res + " = " + (res * 100) + "\\%$$");
                 break;
             default:
@@ -130,10 +131,10 @@ function printgraph() {
 
     // Add data
     chart.data = [{
-        "name": "Probabilidad del ejercicio",
+        "name": "Probabilidad",
         "value": (res * 100)
     }, {
-        "name": "Probabilidad complementaria",
+        "name": "Complemento",
         "value": (100 - res * 100)
     }];
 

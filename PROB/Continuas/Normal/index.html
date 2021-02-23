@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Distribución de Poisson</title>
+    <title>Distribución Normal</title>
 
     <!--CSS-->
     <link rel="stylesheet" href="http://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -27,7 +27,8 @@
     <div class="fluid-container">
         <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
             <a class="navbar-brand" href="../../index.html">Problemas de probabilidad</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -36,19 +37,22 @@
                         <a class="nav-link" href="../../Bayes/index.html">Teorema de Bayes </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="discret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="discret" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
                             Distribuciones discretas
                         </a>
                         <div class="dropdown-menu" aria-labelledby="discret">
                             <a class="dropdown-item" href="../../Discretas/Binomial/index.html">Binomial</a>
                             <a class="dropdown-item" href="../../Discretas/Geometrica/index.html">Geométrica</a>
-                            <a class="dropdown-item" href="../../Discretas/Hipergeometrica/index.html">Hipergeométrica</a>
+                            <a class="dropdown-item"
+                                href="../../Discretas/Hipergeometrica/index.html">Hipergeométrica</a>
                             <a class="dropdown-item" href="../../Discretas/BinomialNeg/index.html">Binomial negativa</a>
                             <a class="dropdown-item" href="../../Discretas/Poisson/index.html">Poisson</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="continue" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="continue" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
                             Distribuciones continuas
                         </a>
                         <div class="dropdown-menu" aria-labelledby="continue">
@@ -80,10 +84,15 @@
                 </p>
                 <div class="row">
                     <div class="col-6">
-                        <p>La distribución normal (en ocasiones llamada distribución gaussiana) es la distribución continua que se utiliza más comúnmente en estadística, es un modelo que aproxima el valor de una variable aleatoria a una situación ideal,
+                        <p>La distribución normal (en ocasiones llamada distribución gaussiana) es la distribución
+                            continua que se utiliza más comúnmente en estadística, es un modelo que aproxima el valor de
+                            una variable aleatoria a una situación ideal,
                             dependiendo de <strong>media</strong> y la <strong>desviación típica</strong></p>
-                        <p>En la distribución normal, se puede calcular la probabilidad de que varios valores ocurran dentro de ciertos rangos o intervalos. Sin embargo, la probabilidad exacta de un valor particular dentro de una distribución continua, como
-                            la distribución normal, es cero. Esta propiedad distingue a las variables continuas, que son medidas, de las variables discretas, las cuales son contadas.</p>
+                        <p>En la distribución normal, se puede calcular la probabilidad de que varios valores ocurran
+                            dentro de ciertos rangos o intervalos. Sin embargo, la probabilidad exacta de un valor
+                            particular dentro de una distribución continua, como
+                            la distribución normal, es cero. Esta propiedad distingue a las variables continuas, que son
+                            medidas, de las variables discretas, las cuales son contadas.</p>
                     </div>
                     <div class="col-6 rigth-column">
                         <h6>La distribución normal tiene importantes propiedades teóricas:</h6>
@@ -91,10 +100,10 @@
                             <li>Tiene una apariencia de forma de campana (y, por ende, es simétrica).</li>
                             <li>Su variable aleatoria asociada tiene un rango infinito \(( -\infty
                                 < x < \infty)\).</li>
-                                    <li>Está definida por la funcion f(x):</li><br>
-                                    <h4>\(\frac{1}{\sqrt{2\pi\sigma}} e^{- \frac{1}{2\sigma^{2}} (x - \mu)^2} \)</h4>
-                                    <p>Donde \(\mu\) es la media y \(\sigma\) es la desviación estandar.</p>
-                                    <img src="./images/grafica.png" />
+                            <li>Está definida por la funcion f(x):</li><br>
+                            <h4>\(\frac{1}{\sigma \sqrt{2\pi}} e^{- \frac{1}{2\sigma^{2}} (x - \mu)^2} \)</h4>
+                            <p>Donde \(\mu\) es la media y \(\sigma\) es la desviación estandar.</p>
+                            <img src="./images/grafica.png" />
 
                         </ul>
 
@@ -105,8 +114,11 @@
                 <div class="fluid-container row">
                     <div class="offset-1 col-9">
                         <h5>A tener en cuenta...</h5>
-                        <p>Teniendo en cuenta que la distribución de probabilidad en la distribución normal, se encuentra a travez de un area bajo la curva de la función anteriormente mencionada, el teorema brinda una tabla de valores para cada cada unidad
-                            estandar y asi poder hallar de manera mas facil el area bajo la curva y asi una distribución de probabilidad.
+                        <p>Teniendo en cuenta que la distribución de probabilidad en la distribución normal, se
+                            encuentra a travez de un area bajo la curva de la función anteriormente mencionada, el
+                            teorema brinda una tabla de valores para cada cada unidad
+                            estandar y asi poder hallar de manera mas facil el area bajo la curva y asi una distribución
+                            de probabilidad.
                         </p>
                         <div class="row">
                             <div class="col-5">
@@ -128,14 +140,20 @@
                     <div class="row">
                         <div class="col-6 text-justify">
                             <p>
-                                Si las temperaturas de la ciudad de Bogotá alcanzan en promedio temperaturas de \( 19.3^{\circ} C\) en el mes de Octubre y además se presentan con una distribución normal, donde si desviación estandar es \( 4^{\circ} C\).<br>                                Calcule la probabilidad de que el primer día de noviembre se tenga una temperatura menor o igual a \( 4^{\circ} C\)
+                                Si las temperaturas de la ciudad de Bogotá alcanzan en promedio temperaturas de \(
+                                19.3^{\circ} C\) en el mes de Octubre y además se presentan con una distribución normal,
+                                donde si desviación estandar es \( 4^{\circ} C\).<br> Calcule la probabilidad de que el
+                                primer día de noviembre se tenga una temperatura menor o igual a \( 4^{\circ} C\)
                             </p>
                             <h6>Solución...</h6>
                             <p>
-                                Para el desarrollo de la solucion se debe tener en cuenta que en el enunciado enuncian a \(\mu \) (la media) = 19.3 y \(\sigma \) (la desviación estandar) = 4.
+                                Para el desarrollo de la solucion se debe tener en cuenta que en el enunciado enuncian a
+                                \(\mu \) (la media) = 19.3 y \(\sigma \) (la desviación estandar) = 4.
                             </p>
                             <p>
-                                Sin embargo, para hacer uso de la tabla es necesario encontrar el valor de la unidad estandar de la probabilidad la cual se denota con \(Z\) y se calcula así \(Z = \frac{x - \mu }{\sigma}\)
+                                Sin embargo, para hacer uso de la tabla es necesario encontrar el valor de la unidad
+                                estandar de la probabilidad la cual se denota con \(Z\) y se calcula así \(Z = \frac{x -
+                                \mu }{\sigma}\)
                             </p>
 
 
@@ -144,45 +162,48 @@
                         <div class="col-6 rigth-column">
                             <!-- <div id="chartdiv"></div> -->
                             <p>
-                                Dejando eso claro se obtiene que la unidad estandar para los valores buscados es \(Z = \frac{22 - 19.3}{4} = 0.67\) (Para efectos de mejor navegación en la tabla se debe aproximar el valor de \(Z\) a dos decimales )
+                                Dejando eso claro se obtiene que la unidad estandar para los valores buscados es \(Z =
+                                \frac{22 - 19.3}{4} = 0.67\) (Para efectos de mejor navegación en la tabla se debe
+                                aproximar el valor de \(Z\) a dos decimales )
                             </p>
                             <p>
-                                Se debe tener en cuenta que para navegar en la tabla se debe ver la parte decimal del valor de \(Z\) en donde sus décimas son las filas y sus centésimas son las columnas; para el caso del ejemplo es la fila de \(0.6\) y la columna de \(0.07\), de esta
-                                manera el valor para el area bajo la curva y la probabilidad preguntada es de <strong> \(0.7486\)</strong>
+                                Se debe tener en cuenta que para navegar en la tabla se debe ver la parte decimal del
+                                valor de \(Z\) en donde sus décimas son las filas y sus centésimas son las columnas;
+                                para el caso del ejemplo es la fila de \(0.6\) y la columna de \(0.07\), de esta
+                                manera el valor para el area bajo la curva y la probabilidad preguntada es de <strong>
+                                    \(0.7486\)</strong>
                             </p>
                         </div>
                     </div>
 
                 </div>
 
+                <h5 class="card-title ml-4">Calculadora de distribucion normal</h5>
 
-                <div class="row mt-3">
-                    <div class="col-6">
-
-                    </div>
-                    <div class="col-6">
-
-                    </div>
-                </div>
-                <h5 class="card-title ml-4">Calculadora de listribucion normal</h5>
                 <div class="row ml-4">
-                    <div class="col-6">
-                        A continuación puede calcular una probabilidad de un \(x ,\) para un \(\mu\) y un \(\sigma\) especificos.
+                    <div class="col-12">
+                        <p>
+                            A continuación puede calcular una probabilidad de un \(x ,\) para un \(\mu\) y un \(\sigma\)
+                            especificos.
+                        </p>
+                    </div>
+                    <div class="col-3">
                         <div class="form-group">
-                            <label for="valueMi" class="col-form-label">
-                                \(\mu\) 
+                            <label for="valueMu" class="col-form-label">
+                                \(\mu\)
                             </label>
                             <input type="number" class="form-control" id="valueMu" min="1" step="1" max="100" required>
                         </div>
                         <div class="form-group">
-                            <label for="valueMi" class="col-form-label">
-                                \(\sigma\) (entero mayor que 0)
+                            <label for="valueSigma" class="col-form-label">
+                                \(\sigma\) 
                             </label>
-                            <input type="number" class="form-control" id="valueSigma" min="1" step="1" max="100" required>
+                            <input type="number" class="form-control" id="valueSigma" min="1" step="1" max="100"
+                                required>
                         </div>
                         <div class="form-group">
                             <label for="valueX" class="col-form-label">
-                                \(x\) (entero igual o mayor que 0)
+                                \(x\) 
                             </label>
                             <input type="number" class="form-control" id="valueX" min="0" step="1" max="100" required>
                         </div>
@@ -191,21 +212,23 @@
                                 Operador
                             </label>
                             <select id="valueOperator" class="form-control" onchange="showGuide()">
-                                <option value="mayor">mayor o igual a x</option>
-                                <option value="menor">menor o igual a x</option>
+                                <option value="eq">Igual a x</option>
+                                <option value="geq">Mayor o igual a x</option>
+                                <option value="leq">Menor o igual a x</option>
                             </select>
                         </div>
+                        <p id="eqGuide">\(P(X = x)\)</p>
                         <p id="geqGuide">\(P(X \geq x)\)</p>
                         <p id="leqGuide">\(P(X \leq x)\)</p>
-                        <input type="button" class="btn btn-primary" id="calculate" value="Calcular" onclick="setValues()"><br><br>
-
+                        <input type="button" class="btn btn-primary" id="calculate" value="Calcular"
+                            onclick="setValues()"><br><br>
                     </div>
-                    <div class="col-6">
-                        <p>\(Z = \frac{x - \mu }{\sigma}\) = </p>
-                        <p id="geqGuide">\(P(X \geq x)\) = </p>
-                        <p id="leqGuide">\(P(X \leq x)\) = </p>
+                    <div class="col-9">
+                        <div id="chartdiv"></div>
                     </div>
                 </div>
+                <p id="eq">
+                </p>
             </div>
         </div>
     </div>

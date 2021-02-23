@@ -22,7 +22,14 @@ function factorial(n) {
 }
 
 function combination(n, x) {
-    return (factorial(n) / (factorial(x) * factorial(n - x)));
+    console.log(n + " " + x);
+
+    if(x>n){
+        return 0;
+    }else{
+        return (factorial(n) / (factorial(x) * factorial(n - x)));
+        
+    }
 }
 
 function calculate(nPob, n, k, x) {
@@ -43,7 +50,7 @@ function setValues() {
         alert("Todos los valores deben ser mayores o iguales a 0");
         $('#eq').hide();
     } else if (valueY > valueR) {
-        alert("El valor de y debe ser menor o igual al de R");
+        alert("El valor de y debe ser menor o igual al de r");
         $('#eq').hide();
     } else if (valueN > valueBigN) {
         alert("El valor de n no puede ser mayor que N");
@@ -82,52 +89,53 @@ function setValues() {
             case "eq":
 
                 res = calculate(valueBigN, valueN, valueR, valueY);
+                res = Math.round((res + Number.EPSILON) * 10000) / 10000
                 $('#eq').html("$$P(" + valueY + ")=\\frac{ \\displaystyle\\binom{" + valueR + "}{" + valueY + "} \\displaystyle\\binom{" + valueBigN + "-" + valueR + "}{" + valueN + "-" + valueY + "}}{\\displaystyle\\binom{" + valueBigN + "}{" + valueN + "}} = " + res + " = " + (res * 100) + "\\%$$");
                 break;
             case "geq":
                 res = 0;
                 var str = "";
-                for (var i = 0; i < valueY; i++) {
+                for (var i = 1; i < valueY; i++) {
                     res += calculate(valueBigN, valueN, valueR, i);
                     str += "P(X=" + i + ")+";
                 }
                 str = str.substr(0, str.length - 1);
                 res = 1 - res;
-                res = Math.round((res + Number.EPSILON) * 100000000) / 100000000
+                res = Math.round((res + Number.EPSILON) * 10000) / 10000
                 $('#eq').html("$$P(X\\geq" + valueY + ") = 1-(" + str + ") = " + res + " = " + (res * 100) + "\\%$$");
                 break;
             case "leq":
                 res = 0;
                 var str = "";
-                for (var i = 0; i <= valueY; i++) {
+                for (var i = 1; i <= valueY; i++) {
                     res += calculate(valueBigN, valueN, valueR, i);
                     str += "P(X=" + i + ")+";
                 }
                 str = str.substr(0, str.length - 1);
-                res = Math.round((res + Number.EPSILON) * 100000000) / 100000000
+                res = Math.round((res + Number.EPSILON) * 10000) / 10000
                 $('#eq').html("$$P(X\\leq" + valueY + ") = (" + str + ") = " + res + " = " + (res * 100) + "\\%$$");
                 break;
             case "less":
                 res = 0;
                 var str = "";
-                for (var i = 0; i < valueY; i++) {
+                for (var i = 1; i < valueY; i++) {
                     res += calculate(valueBigN, valueN, valueR, i);
                     str += "P(X=" + i + ")+";
                 }
                 str = str.substr(0, str.length - 1);
-                res = Math.round((res + Number.EPSILON) * 100000000) / 100000000
+                res = Math.round((res + Number.EPSILON) * 10000) / 10000
                 $('#eq').html("$$P(X<" + valueY + ") = (" + str + ") = " + res + " = " + (res * 100) + "\\%$$");
                 break;
             case "more":
                 res = 0;
                 var str = "";
-                for (var i = 0; i <= valueY; i++) {
+                for (var i = 1; i <= valueY; i++) {
                     res += calculate(valueBigN, valueN, valueR, i);
                     str += "P(X=" + i + ")+";
                 }
                 str = str.substr(0, str.length - 1);
                 res = 1 - res;
-                res = Math.round((res + Number.EPSILON) * 100000000) / 100000000
+                res = Math.round((res + Number.EPSILON) * 10000) / 10000
                 $('#eq').html("$$P(X>" + valueY + ") = 1-(" + str + ") = " + res + " = " + (res * 100) + "\\%$$");
                 break;
             default:
@@ -164,10 +172,10 @@ function printgraph() {
 
     // Add data
     chart.data = [{
-        "name": "Probabilidad del ejercicio",
+        "name": "Probabilidad",
         "value": (res * 100)
     }, {
-        "name": "Probabilidad complementaria",
+        "name": "Complemento",
         "value": (100 - res * 100)
     }];
 
