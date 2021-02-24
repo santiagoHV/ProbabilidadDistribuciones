@@ -3,6 +3,7 @@
 var valueMu;
 var valueSigma;
 var valueX;
+var valueZ;
 var res;
 var opsList = ["eq", "geq", "leq"];
 
@@ -15,15 +16,14 @@ showGuide();
 
 ;
 
-function f1(x) {
-
-    x = (x - valueMu) / valueSigma;
-    return Math.exp(-1 / 2 * Math.pow(x, 2));
+function f1(z) {
+    //console.log("z en f1 = =" + z);
+    return Math.exp(-Math.pow(z, 2) / 2);
 }
 
-function f2(x) {
-    x = (x - valueMu) / valueSigma;
-    return 1 / Math.pow(x, 2) * Math.exp(-1 / (2 * Math.pow(x, 2)));
+function f2(z) {
+    //console.log("z en f2 = =" + z);
+    return 1 / Math.pow(z, 2) * Math.exp(-1 / (2 * Math.pow(z, 2)));
 }
 
 function simpson(a, b, n) {
@@ -33,11 +33,9 @@ function simpson(a, b, n) {
     var sum = f1(a) + f1(b);
     for (var i = 1; i < n; i += 2) {
         sum += 4 * f1(a + i * h);
-        //console.log("sum += 4 * "+ f1(a + i * h)+"");
     }
     for (var i = 2; i < n; i += 2) {
         sum += 2 * f1(a + i * h);
-        //console.log("sum += 2 * "+ f1(a + i * h)+"");
     }
 
     return (sum * h / 3);
@@ -77,8 +75,41 @@ function riman2(a, b, n) {
 function calculate_from_inf(x) {
     if (x < 0) {
 
-        var rimanRes = riman(1 / x, 0, 100000);
-        return rimanRes / (Math.sqrt(2 * Math.PI) * valueSigma);
+        var rimanRes = riman(1 / x, 0, 10);
+
+        console.log("riman = " + rimanRes);
+        return rimanRes / (Math.sqrt(2 * Math.PI) );
+    } else if (x == 0) {
+        cut = - 2;
+
+        var rimanRes = riman(1 / cut, 0, 10);
+        var rimanRes2 = riman2(cut, x, 10);
+
+        console.log("riman = " + rimanRes + " riman2=" + rimanRes2);
+
+        return (rimanRes + rimanRes2) / (Math.sqrt(2 * Math.PI) );
+    } else {
+        cut = - Math.abs(x) / 2;
+
+        var rimanRes = riman(1 / cut, 0, 10);
+        var simpsonRes = simpson(cut, x, 10);
+
+        console.log("riman = " + rimanRes + " simpson=" + simpsonRes);
+
+        return (rimanRes + simpsonRes) / (Math.sqrt(2 * Math.PI) );
+    }
+}
+
+function calculate_to_inf(x) {
+    if (x < 0) {
+        cut = - Math.abs(x) / 2;
+
+        var rimanRes = riman(1 / cut, 0, 10000);
+        var simpsonRes = simpson(cut, x, 10000);
+
+        console.log("riman = " + rimanRes + " simpson=" + simpsonRes);
+
+        return (rimanRes + simpsonRes) / (Math.sqrt(2 * Math.PI) );
     } else if (x == 0) {
         cut = - 2;
 
@@ -87,51 +118,40 @@ function calculate_from_inf(x) {
 
         console.log("riman = " + rimanRes + " riman2=" + rimanRes2);
 
-        return (rimanRes + rimanRes2) / (Math.sqrt(2 * Math.PI) * valueSigma);
+        return (rimanRes + rimanRes2) / (Math.sqrt(2 * Math.PI) );
     } else {
-        cut = - Math.abs(x) / 2;
-
-        var rimanRes = riman(1 / cut, 0, 10000);
-        var simpsonRes = simpson(cut, x, 10000);
-
-        console.log("riman = " + rimanRes + " simpson=" + simpsonRes);
-
-        return (rimanRes + simpsonRes) / (Math.sqrt(2 * Math.PI) * valueSigma);
-
+        var rimanRes = riman(1 / x, 0, 10000);
+        console.log("riman = " + rimanRes);
+        return rimanRes / (Math.sqrt(2 * Math.PI) );
     }
-}
-
-function calculate_to_inf(x) {
-    return 1 - calculate_from_inf(x);
 }
 
 
 function setValues() {
-    valueMu = ($('#valueMu').val());
-    valueSigma = ($('#valueSigma').val());
-    valueX = ($('#valueX').val());
+    valueMu = parseFloat($('#valueMu').val());
+    valueSigma = parseFloat($('#valueSigma').val());
+    valueX = parseFloat($('#valueX').val());
     res = 0;
     $('#eq').hide();
 
-    if (valueMu == "" || valueSigma == "" || valueX == "") {
+    if (valueMu == null || valueSigma == null || valueX == null) {
         alert("Los valores ingresados estan incompletos");
         $('#eq').hide();
+    } else if (!(valueSigma > 0)) {
+        alert("Sigma debe ser mayor a 0");
+        $('#eq').hide();
     } else {
+        valueZ = (valueX - valueMu) / valueSigma;
         switch ($('#valueOperator').val()) {
-            case "eq":
-                res = f1(valueX);
-                res = Math.round((res + Number.EPSILON) * 10000) / 10000
-                $('#eq').html("<h4>$$P(X=" + valueX + ")= \\frac{1}{" + valueSigma + " \\sqrt{2\\pi}} e^{- \\frac{1}{2 (" + valueSigma + ")^{2}} (" + valueX + " - " + valueMu + ")^2}  = " + res + " = " + Math.round(((res * 100) + Number.EPSILON) * 10000) / 10000 + "\\%$$</h4>");
-                break;
             case "geq":
-                res += calculate_to_inf(valueX);
-                res = Math.round((res + Number.EPSILON) * 10000) / 10000
-                $('#eq').html("<h4>$$P(X\\geq" + valueX + ") = \\int_{" + valueX + "}^{\\infty} \\frac{1}{" + valueSigma + " \\sqrt{2\\pi}} e^{- \\frac{1}{2 (" + valueSigma + ")^{2}} (x - (" + valueMu + "))^2} dx  = " + res + " = " + Math.round(((res * 100) + Number.EPSILON) * 100) / 100 + "\\%$$</h4>");
+                res += calculate_to_inf(valueZ);
+                res = Math.round((res + Number.EPSILON) * 1000) / 1000
+                $('#eq').html("<h5>$$ Z= \\frac{x-\\mu}{\\sigma}  = " + valueZ + " $$</h5><h4>$$P(X\\geq Z) = \\int_{" + valueX + "}^{\\infty} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dx  = " + res + " = " + Math.round(((res * 100) + Number.EPSILON) * 100) / 100 + "\\%$$</h4>");
                 break;
             case "leq":
-                res += calculate_from_inf(valueX);
-                res = Math.round((res + Number.EPSILON) * 10000) / 10000
-                $('#eq').html("<h4>$$P(X\\leq" + valueX + ") = \\int_{-\\infty}^{" + valueX + "} \\frac{1}{" + valueSigma + " \\sqrt{2\\pi}} e^{- \\frac{1}{2 (" + valueSigma + ")^{2}} (x - (" + valueMu + "))^2} dx  = " + res + " = " + Math.round(((res * 100) + Number.EPSILON) * 100) / 100 + "\\%$$</h4>");
+                res += calculate_from_inf(valueZ);
+                res = Math.round((res + Number.EPSILON) * 1000) / 1000
+                $('#eq').html("<h5>$$ Z= \\frac{x-\\mu}{\\sigma}  = " + valueZ + " $$</h5><h4>$$P(X\\leq Z) = \\int_{-\\infty}^{" + valueX + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + res + " = " + Math.round(((res * 100) + Number.EPSILON) * 100) / 100 + "\\%$$</h4>");
                 break;
             default:
                 res = 0;
