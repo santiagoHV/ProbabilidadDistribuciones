@@ -78,7 +78,7 @@ function calculate_from_inf(x) {
         var rimanRes = riman(1 / x, 0, 10);
 
         console.log("riman = " + rimanRes);
-        return rimanRes / (Math.sqrt(2 * Math.PI) );
+        return rimanRes / (Math.sqrt(2 * Math.PI));
     } else if (x == 0) {
         cut = - 2;
 
@@ -87,7 +87,7 @@ function calculate_from_inf(x) {
 
         console.log("riman = " + rimanRes + " riman2=" + rimanRes2);
 
-        return (rimanRes + rimanRes2) / (Math.sqrt(2 * Math.PI) );
+        return (rimanRes + rimanRes2) / (Math.sqrt(2 * Math.PI));
     } else {
         cut = - Math.abs(x) / 2;
 
@@ -96,34 +96,12 @@ function calculate_from_inf(x) {
 
         console.log("riman = " + rimanRes + " simpson=" + simpsonRes);
 
-        return (rimanRes + simpsonRes) / (Math.sqrt(2 * Math.PI) );
+        return (rimanRes + simpsonRes) / (Math.sqrt(2 * Math.PI));
     }
 }
 
 function calculate_to_inf(x) {
-    if (x < 0) {
-        cut = - Math.abs(x) / 2;
-
-        var rimanRes = riman(1 / cut, 0, 10000);
-        var simpsonRes = simpson(cut, x, 10000);
-
-        console.log("riman = " + rimanRes + " simpson=" + simpsonRes);
-
-        return (rimanRes + simpsonRes) / (Math.sqrt(2 * Math.PI) );
-    } else if (x == 0) {
-        cut = - 2;
-
-        var rimanRes = riman(1 / cut, 0, 10000);
-        var rimanRes2 = riman2(cut, x, 10000);
-
-        console.log("riman = " + rimanRes + " riman2=" + rimanRes2);
-
-        return (rimanRes + rimanRes2) / (Math.sqrt(2 * Math.PI) );
-    } else {
-        var rimanRes = riman(1 / x, 0, 10000);
-        console.log("riman = " + rimanRes);
-        return rimanRes / (Math.sqrt(2 * Math.PI) );
-    }
+    return 1 -calculate_from_inf(x);
 }
 
 
