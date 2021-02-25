@@ -118,9 +118,11 @@ function setValues() {
     if ($('#valueMu').val() == "" || $('#valvalueSigmaueMu').val() == "" || $('#valueX').val() == "") {
         alert("Los valores ingresados estan incompletos");
         $('#eq').hide();
+        $('#chartdiv').hide();
     } else if (!(valueSigma > 0)) {
         alert("Sigma debe ser mayor a 0");
         $('#eq').hide();
+        $('#chartdiv').hide();
     } else {
         //proceso
 
@@ -132,6 +134,10 @@ function setValues() {
                 resP = Math.round((res + Number.EPSILON) * 100000) / 100000
                 valueZ = Math.round((valueZ + Number.EPSILON) * 100000) / 100000
                 $('#eq').html("<h5>$$ Z= \\frac{x-\\mu}{\\sigma}  = " + valueZ + " $$</h5><h4>$$P(X\\geq Z) = \\int_{" + valueZ + "}^{\\infty} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dx  = " + resP + " = " + Math.round(((res * 100) + Number.EPSILON) * 1000) / 1000 + "\\%$$</h4>");
+
+                $('#eq').show();
+                MathJax.typeset();
+                printgraph();
                 break;
             case "leq":
                 valueZ = (valueX - valueMu) / valueSigma;
@@ -139,6 +145,10 @@ function setValues() {
                 resP = Math.round((res + Number.EPSILON) * 100000) / 100000
                 valueZ = Math.round((valueZ + Number.EPSILON) * 100000) / 100000
                 $('#eq').html("<h5>$$ Z= \\frac{x-\\mu}{\\sigma}  = " + valueZ + " $$</h5><h4>$$P(X\\leq Z) = \\int_{-\\infty}^{" + valueZ + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + resP + " = " + Math.round(((res * 100) + Number.EPSILON) * 1000) / 1000 + "\\%$$</h4>");
+
+                $('#eq').show();
+                MathJax.typeset();
+                printgraph();
                 break;
             case "lag":
 
@@ -149,27 +159,34 @@ function setValues() {
 
                     alert("Los valores ingresados estan incompletos");
                     $('#eq').hide();
+                    $('#chartdiv').hide();
                 } else if (valueB < valueA) {
 
                     alert("El valor de 'b' debe ser mayor o igual 'a')");
                     $('#eq').hide();
+                    $('#chartdiv').hide();
                 } else if (valueB == valueA) {
                     valueZ1 = ((valueA - valueMu) / valueSigma)
                     valueZ2 = ((valueB - valueMu) / valueSigma)
                     res = 0;
                     valueZ1 = Math.round((valueZ1 + Number.EPSILON) * 100000) / 100000
                     valueZ2 = Math.round((valueZ2 + Number.EPSILON) * 100000) / 100000
-                    $('#eq').html("<h5>$$ Z_{1} = \\frac{x_{1}-\\mu}{\\sigma}  = " + valueZ1 + "$$</h5><h5>$$  Z_{2}= \\frac{x_{2}-\\mu}{\\sigma}  = " + valueZ2 + " $$</h5><h4>$$P(Z_{1}\\leq X\\leq Z_{2}) = \\int_{" + valueZ1 + "}^{" + valueZ2 + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + res + " = " +res + "\\%$$</h4>");
+                    $('#eq').html("<h5>$$ Z_{1} = \\frac{x_{1}-\\mu}{\\sigma}  = " + valueZ1 + "$$</h5><h5>$$  Z_{2}= \\frac{x_{2}-\\mu}{\\sigma}  = " + valueZ2 + " $$</h5><h4>$$P(Z_{1}\\leq X\\leq Z_{2}) = \\int_{" + valueZ1 + "}^{" + valueZ2 + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + res + " = " + res + "\\%$$</h4>");
+                    $('#eq').show();
+                    MathJax.typeset();
+                    printgraph();
                     break;
                 } else {
                     valueZ1 = ((valueA - valueMu) / valueSigma)
                     valueZ2 = ((valueB - valueMu) / valueSigma)
-
                     res = calculate_between(valueZ1, valueZ2);
                     var resP = Math.round((res + Number.EPSILON) * 100000) / 100000
                     valueZ1 = Math.round((valueZ1 + Number.EPSILON) * 100000) / 100000
                     valueZ2 = Math.round((valueZ2 + Number.EPSILON) * 100000) / 100000
                     $('#eq').html("<h5>$$ Z_{1} = \\frac{x_{1}-\\mu}{\\sigma}  = " + valueZ1 + "$$</h5><h5>$$  Z_{2}= \\frac{x_{2}-\\mu}{\\sigma}  = " + valueZ2 + " $$</h5><h4>$$P(Z_{1}\\leq X\\leq Z_{2}) = \\int_{" + valueZ1 + "}^{" + valueZ2 + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + resP + " = " + Math.round(((res * 100) + Number.EPSILON) * 1000) / 1000 + "\\%$$</h4>");
+                    $('#eq').show();
+                    MathJax.typeset();
+                    printgraph();
                     break;
                 }
 
@@ -177,9 +194,6 @@ function setValues() {
                 res = 0;
                 break;
         }
-        $('#eq').show();
-        MathJax.typeset();
-        printgraph();
     }
 }
 
@@ -204,7 +218,7 @@ function showGuide() {
 }
 
 function printgraph() {
-
+    $('#chartdiv').show();
     // Themes begin
     am4core.useTheme(am4themes_animated);
     // Themes end
