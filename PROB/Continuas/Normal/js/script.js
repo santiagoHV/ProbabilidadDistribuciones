@@ -136,14 +136,16 @@ function setValues() {
             case "geq":
                 valueZ = (valueX - valueMu) / valueSigma;
                 res = calculate_to_inf(valueZ);
-                res = Math.round((res + Number.EPSILON) * 10000) / 10000
-                $('#eq').html("<h5>$$ Z= \\frac{x-\\mu}{\\sigma}  = " + valueZ + " $$</h5><h4>$$P(X\\geq Z) = \\int_{" + valueX + "}^{\\infty} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dx  = " + res + " = " + Math.round(((res * 100) + Number.EPSILON) * 100) / 100 + "\\%$$</h4>");
+                resP = Math.round((res + Number.EPSILON) * 100000) / 100000
+                valueZ = Math.round((valueZ + Number.EPSILON) * 100000) / 100000
+                $('#eq').html("<h5>$$ Z= \\frac{x-\\mu}{\\sigma}  = " + valueZ + " $$</h5><h4>$$P(X\\geq Z) = \\int_{" + valueX + "}^{\\infty} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dx  = " + resP + " = " + Math.round(((res * 100) + Number.EPSILON) * 1000) / 1000 + "\\%$$</h4>");
                 break;
             case "leq":
                 valueZ = (valueX - valueMu) / valueSigma;
                 res = calculate_from_inf(valueZ);
-                res = Math.round((res + Number.EPSILON) * 10000) / 10000
-                $('#eq').html("<h5>$$ Z= \\frac{x-\\mu}{\\sigma}  = " + valueZ + " $$</h5><h4>$$P(X\\leq Z) = \\int_{-\\infty}^{" + valueX + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + res + " = " + Math.round(((res * 100) + Number.EPSILON) * 100) / 100 + "\\%$$</h4>");
+                resP = Math.round((res + Number.EPSILON) * 100000) / 100000
+                valueZ = Math.round((valueZ + Number.EPSILON) * 100000) / 100000
+                $('#eq').html("<h5>$$ Z= \\frac{x-\\mu}{\\sigma}  = " + valueZ + " $$</h5><h4>$$P(X\\leq Z) = \\int_{-\\infty}^{" + valueX + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + resP + " = " + Math.round(((res * 100) + Number.EPSILON) * 1000) / 1000 + "\\%$$</h4>");
                 break;
             case "lag":
 
@@ -159,18 +161,22 @@ function setValues() {
                     alert("El valor de 'b' debe ser mayor o igual 'a')");
                     $('#eq').hide();
                 } else if (valueB == valueA) {
-
+                    valueZ1 = ((valueA - valueMu) / valueSigma)
+                    valueZ2 = ((valueB - valueMu) / valueSigma)
                     res = 0;
-                    res = Math.round((res + Number.EPSILON) * 10000) / 10000
-                    $('#eq').html("<h5>$$ Z_{1} = \\frac{x_{1}-\\mu}{\\sigma}  = " + valueZ1 + "$$</h5><h5>$$  Z_{2}= \\frac{x_{2}-\\mu}{\\sigma}  = " + valueZ2 + " $$</h5><h4>$$P(Z_{1}\\leq X\\leq Z_{2}) = \\int_{" + valueZ1 + "}^{" + valueZ2 + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + res + " = " + Math.round(((res * 100) + Number.EPSILON) * 100) / 100 + "\\%$$</h4>");
+                    valueZ1 = Math.round((valueZ1 + Number.EPSILON) * 100000) / 100000
+                    valueZ2 = Math.round((valueZ2 + Number.EPSILON) * 100000) / 100000
+                    $('#eq').html("<h5>$$ Z_{1} = \\frac{x_{1}-\\mu}{\\sigma}  = " + valueZ1 + "$$</h5><h5>$$  Z_{2}= \\frac{x_{2}-\\mu}{\\sigma}  = " + valueZ2 + " $$</h5><h4>$$P(Z_{1}\\leq X\\leq Z_{2}) = \\int_{" + valueZ1 + "}^{" + valueZ2 + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + res + " = " +res + "\\%$$</h4>");
                     break;
                 } else {
                     valueZ1 = ((valueA - valueMu) / valueSigma)
                     valueZ2 = ((valueB - valueMu) / valueSigma)
 
                     res = calculate_between(valueZ1, valueZ2);
-                    res = Math.round((res + Number.EPSILON) * 10000) / 10000
-                    $('#eq').html("<h5>$$ Z_{1} = \\frac{x_{1}-\\mu}{\\sigma}  = " + valueZ1 + "$$</h5><h5>$$  Z_{2}= \\frac{x_{2}-\\mu}{\\sigma}  = " + valueZ2 + " $$</h5><h4>$$P(Z_{1}\\leq X\\leq Z_{2}) = \\int_{" + valueZ1 + "}^{" + valueZ2 + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + res + " = " + Math.round(((res * 100) + Number.EPSILON) * 100) / 100 + "\\%$$</h4>");
+                    var resP = Math.round((res + Number.EPSILON) * 100000) / 100000
+                    valueZ1 = Math.round((valueZ1 + Number.EPSILON) * 100000) / 100000
+                    valueZ2 = Math.round((valueZ2 + Number.EPSILON) * 100000) / 100000
+                    $('#eq').html("<h5>$$ Z_{1} = \\frac{x_{1}-\\mu}{\\sigma}  = " + valueZ1 + "$$</h5><h5>$$  Z_{2}= \\frac{x_{2}-\\mu}{\\sigma}  = " + valueZ2 + " $$</h5><h4>$$P(Z_{1}\\leq X\\leq Z_{2}) = \\int_{" + valueZ1 + "}^{" + valueZ2 + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + resP + " = " + Math.round(((res * 100) + Number.EPSILON) * 1000) / 1000 + "\\%$$</h4>");
                     break;
                 }
 
@@ -197,12 +203,11 @@ function showGuide() {
     if ($('#valueOperator').val() == 'lag') {
         $('#aditional').show();
         $('#labelX').html("$$ a $$");
-        MathJax.typeset();
     } else {
         $('#aditional').hide();
         $('#labelX').html("$$ x $$");
-        MathJax.typeset();
     }
+    MathJax.typeset();
 }
 
 function printgraph() {
@@ -220,7 +225,7 @@ function printgraph() {
         "value": (res * 100)
     }, {
         "name": "Complemento",
-        "value": (100 - res * 100)
+        "value": (100 - (res * 100))
     }];
 
     // Add and configure Series
