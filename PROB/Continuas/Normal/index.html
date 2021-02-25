@@ -192,13 +192,13 @@
                                 Operador
                             </label>
                             <select id="valueOperator" class="form-control" onchange="showGuide()">
-                                <option value="geq">Mayor o igual a x</option>
                                 <option value="leq">Menor o igual a x</option>
+                                <option value="geq">Mayor o igual a x</option>
                                 <option value="lag">Mayor que a y menor que b</option>
                             </select>
                         </div>
-                        <p id="geqGuide">\(P(X \geq x)\)</p>
                         <p id="leqGuide">\(P(X \leq x)\)</p>
+                        <p id="geqGuide">\(P(X \geq x)\)</p>
                         <p id="lagGuide">\(P(a \leq X \leq b)\)</p>
                         <input type="button" class="btn btn-primary" id="calculate" value="Calcular" onclick="setValues()"><br><br>
                     </div>

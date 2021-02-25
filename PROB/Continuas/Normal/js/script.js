@@ -171,7 +171,10 @@ function setValues() {
                     res = 0;
                     valueZ1 = Math.round((valueZ1 + Number.EPSILON) * 100000) / 100000
                     valueZ2 = Math.round((valueZ2 + Number.EPSILON) * 100000) / 100000
-                    $('#eq').html("<h5>$$ Z_{1} = \\frac{x_{1}-\\mu}{\\sigma}  = " + valueZ1 + "$$</h5><h5>$$  Z_{2}= \\frac{x_{2}-\\mu}{\\sigma}  = " + valueZ2 + " $$</h5><h4>$$P(Z_{1}\\leq X\\leq Z_{2}) = \\int_{" + valueZ1 + "}^{" + valueZ2 + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + res + " = " + res + "\\%$$</h4>");
+                    $('#eq').html(
+                        "<h5>$$ Z_{1} = \\frac{a-\\mu}{\\sigma}  = \\frac{" + valueA + "-" + valueMu + "}{" + valueSigma + "} = " + valueZ1 + "$$</h5>" +
+                        "<h5>$$  Z_{2}= \\frac{b-\\mu}{\\sigma}  = \\frac{" + valueB + "-" + valueMu + "}{" + valueSigma + "} = " + valueZ2 + " $$</h5>" +
+                        "<h4>$$P(Z_{1}\\leq X\\leq Z_{2}) = \\int_{" + valueZ1 + "}^{" + valueZ2 + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + res + " = " + res + "\\%$$</h4>");
                     $('#eq').show();
                     MathJax.typeset();
                     printgraph();
@@ -183,7 +186,10 @@ function setValues() {
                     var resP = Math.round((res + Number.EPSILON) * 100000) / 100000
                     valueZ1 = Math.round((valueZ1 + Number.EPSILON) * 100000) / 100000
                     valueZ2 = Math.round((valueZ2 + Number.EPSILON) * 100000) / 100000
-                    $('#eq').html("<h5>$$ Z_{1} = \\frac{x_{1}-\\mu}{\\sigma}  = " + valueZ1 + "$$</h5><h5>$$  Z_{2}= \\frac{x_{2}-\\mu}{\\sigma}  = " + valueZ2 + " $$</h5><h4>$$P(Z_{1}\\leq X\\leq Z_{2}) = \\int_{" + valueZ1 + "}^{" + valueZ2 + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + resP + " = " + Math.round(((res * 100) + Number.EPSILON) * 1000) / 1000 + "\\%$$</h4>");
+                    $('#eq').html(
+                        "<h5>$$ Z_{1} = \\frac{a-\\mu}{\\sigma}  = \\frac{" + valueA + "-" + valueMu + "}{" + valueSigma + "} = " + valueZ1 + "$$</h5>" +
+                        "<h5>$$  Z_{2}= \\frac{b-\\mu}{\\sigma}  = \\frac{" + valueB + "-" + valueMu + "}{" + valueSigma + "} = " + valueZ2 + " $$</h5>" +
+                        "<h4>$$P(Z_{1}\\leq X\\leq Z_{2}) = \\int_{" + valueZ1 + "}^{" + valueZ2 + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + resP + " = " + Math.round(((res * 100) + Number.EPSILON) * 1000) / 1000 + "\\%$$</h4>");
                     $('#eq').show();
                     MathJax.typeset();
                     printgraph();
