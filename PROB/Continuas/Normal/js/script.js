@@ -129,7 +129,7 @@ function setValues() {
 
         switch ($('#valueOperator').val()) {
             case "geq":
-                valueZ = (valueX - valueMu) / valueSigma;
+                valueZ = (valueX-0.5 - valueMu) / valueSigma;
                 res = calculate_to_inf(valueZ);
                 resP = Math.round((res + Number.EPSILON) * 100000) / 100000
                 valueZ = Math.round((valueZ + Number.EPSILON) * 100000) / 100000
@@ -142,7 +142,7 @@ function setValues() {
                 printgraph();
                 break;
             case "leq":
-                valueZ = (valueX - valueMu) / valueSigma;
+                valueZ = (valueX+0.5 - valueMu) / valueSigma;
                 res = calculate_from_inf(valueZ);
                 resP = Math.round((res + Number.EPSILON) * 100000) / 100000
                 valueZ = Math.round((valueZ + Number.EPSILON) * 100000) / 100000
@@ -157,7 +157,7 @@ function setValues() {
             case "lag":
 
                 valueA = parseFloat($('#valueX').val());
-                valueB = parseFloat($('#valueB').val());
+                valueB = parseFloat($('#valueB').val()) ;
 
                 if ($('#valueB').val() == "") {
 
@@ -170,8 +170,8 @@ function setValues() {
                     $('#eq').hide();
                     $('#chartdiv').hide();
                 } else if (valueB == valueA) {
-                    valueZ1 = ((valueA - valueMu) / valueSigma)
-                    valueZ2 = ((valueB - valueMu) / valueSigma)
+                    valueZ1 = ((valueA- 0.5 - valueMu) / valueSigma)
+                    valueZ2 = ((valueB+ 0.5 - valueMu) / valueSigma)
                     res = 0;
                     valueZ1 = Math.round((valueZ1 + Number.EPSILON) * 100000) / 100000
                     valueZ2 = Math.round((valueZ2 + Number.EPSILON) * 100000) / 100000
@@ -184,8 +184,8 @@ function setValues() {
                     printgraph();
                     break;
                 } else {
-                    valueZ1 = ((valueA - valueMu) / valueSigma)
-                    valueZ2 = ((valueB - valueMu) / valueSigma)
+                    valueZ1 = ((valueA- 0.5 - valueMu) / valueSigma)
+                    valueZ2 = ((valueB+ 0.5 - valueMu) / valueSigma)
                     res = calculate_between(valueZ1, valueZ2);
                     var resP = Math.round((res + Number.EPSILON) * 100000) / 100000
                     valueZ1 = Math.round((valueZ1 + Number.EPSILON) * 100000) / 100000
