@@ -122,7 +122,7 @@ function setValues() {
     res = 0;
     $('#eq').hide();
 
-    if (valueMu == null || valueSigma == null || valueX == null) {
+    if ($('#valueMu').val()=="" ||$('#valvalueSigmaueMu').val()=="" || $('#valueX').val()=="") {
         alert("Los valores ingresados estan incompletos");
         $('#eq').hide();
     } else if (!(valueSigma > 0)) {
@@ -137,14 +137,14 @@ function setValues() {
                 valueX = valueX - 0.5
                 valueZ = (valueX - valueMu) / valueSigma;
                 res = calculate_to_inf(valueZ);
-                res = Math.round((res + Number.EPSILON) * 1000) / 1000
+                res = Math.round((res + Number.EPSILON) * 10000) / 10000
                 $('#eq').html("<h5>$$ Z= \\frac{x-\\mu}{\\sigma}  = " + valueZ + " $$</h5><h4>$$P(X\\geq Z) = \\int_{" + valueX + "}^{\\infty} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dx  = " + res + " = " + Math.round(((res * 100) + Number.EPSILON) * 100) / 100 + "\\%$$</h4>");
                 break;
             case "leq":
                 valueX + 0.5
                 valueZ = (valueX - valueMu) / valueSigma;
                 res = calculate_from_inf(valueZ);
-                res = Math.round((res + Number.EPSILON) * 1000) / 1000
+                res = Math.round((res + Number.EPSILON) * 10000) / 10000
                 $('#eq').html("<h5>$$ Z= \\frac{x-\\mu}{\\sigma}  = " + valueZ + " $$</h5><h4>$$P(X\\leq Z) = \\int_{-\\infty}^{" + valueX + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + res + " = " + Math.round(((res * 100) + Number.EPSILON) * 100) / 100 + "\\%$$</h4>");
                 break;
             case "lag":
@@ -152,13 +152,27 @@ function setValues() {
                 valueA = parseFloat($('#valueX').val()) - 0.5;
                 valueB = parseFloat($('#valueB').val()) + 0.5;
 
-                valueZ1 = ((valueA - valueMu) / valueSigma)
-                valueZ2 = ((valueB - valueMu) / valueSigma)
+                if($('#valueB').val()=="") {
 
-                res = calculate_between(valueZ1, valueZ2);
-                res = Math.round((res + Number.EPSILON) * 1000) / 1000
-                $('#eq').html("<h5>$$ Z_{1} = \\frac{x_{1}-\\mu}{\\sigma}  = " + valueZ1 + "$$</h5><h5>$$  Z_{2}= \\frac{x_{2}-\\mu}{\\sigma}  = " + valueZ2 + " $$</h5><h4>$$P(Z_{1}\\leq X\\leq Z_{2}) = \\int_{" + valueA + "}^{" + valueB + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + res + " = " + Math.round(((res * 100) + Number.EPSILON) * 100) / 100 + "\\%$$</h4>");
-                break;
+                    alert("Los valores ingresados estan incompletos");
+                    $('#eq').hide();
+                }else if(valueB<valueA){
+
+                    alert("El valor de 'b' debe ser mayor o igual 'a')");
+                    $('#eq').hide();
+                }else{
+
+                    valueA = parseFloat($('#valueX').val()) - 0.5;
+                    valueB = parseFloat($('#valueB').val()) + 0.5;
+    
+                    valueZ1 = ((valueA - valueMu) / valueSigma)
+                    valueZ2 = ((valueB - valueMu) / valueSigma)
+    
+                    res = calculate_between(valueZ1, valueZ2);
+                    res = Math.round((res + Number.EPSILON) * 10000) / 10000
+                    $('#eq').html("<h5>$$ Z_{1} = \\frac{x_{1}-\\mu}{\\sigma}  = " + valueZ1 + "$$</h5><h5>$$  Z_{2}= \\frac{x_{2}-\\mu}{\\sigma}  = " + valueZ2 + " $$</h5><h4>$$P(Z_{1}\\leq X\\leq Z_{2}) = \\int_{" + valueA + "}^{" + valueB + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + res + " = " + Math.round(((res * 100) + Number.EPSILON) * 100) / 100 + "\\%$$</h4>");
+                    break;
+                }
 
             default:
                 res = 0;
@@ -182,10 +196,12 @@ function showGuide() {
     }
     if ($('#valueOperator').val() == 'lag') {
         $('#aditional').show();
-        $('#labelX').html("\(a \)");
+        $('#labelX').html("$$ a $$");
+        MathJax.typeset();
     } else {
         $('#aditional').hide();
         $('#labelX').html("$$ x $$");
+        MathJax.typeset();
     }
 }
 
