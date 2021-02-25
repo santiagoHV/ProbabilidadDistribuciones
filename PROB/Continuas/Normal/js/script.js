@@ -46,7 +46,7 @@ function simpson(a, b, n) {
 }
 
 function riman(a, b, n) {
-    console.log("rieman desde a=" + a + " hasta b=" + b);
+    console.log("riman desde a=" + a + " hasta b=" + b);
     var h = (b - a) / n;
     var sum = 0;
 
@@ -61,7 +61,7 @@ function riman(a, b, n) {
 }
 
 function riman2(a, b, n) {
-    console.log("rieman desde a=" + a + " hasta b=" + b);
+    console.log("riman desde a=" + a + " hasta b=" + b);
     var h = (b - a) / n;
     var sum = 0;
 
