@@ -138,14 +138,14 @@ function setValues() {
                 res = calculate_to_inf(valueZ);
                 resP = Math.round((res + Number.EPSILON) * 100000) / 100000
                 valueZ = Math.round((valueZ + Number.EPSILON) * 100000) / 100000
-                $('#eq').html("<h5>$$ Z= \\frac{x-\\mu}{\\sigma}  = " + valueZ + " $$</h5><h4>$$P(X\\geq Z) = \\int_{" + valueX + "}^{\\infty} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dx  = " + resP + " = " + Math.round(((res * 100) + Number.EPSILON) * 1000) / 1000 + "\\%$$</h4>");
+                $('#eq').html("<h5>$$ Z= \\frac{x-\\mu}{\\sigma}  = " + valueZ + " $$</h5><h4>$$P(X\\geq Z) = \\int_{" + valueZ + "}^{\\infty} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dx  = " + resP + " = " + Math.round(((res * 100) + Number.EPSILON) * 1000) / 1000 + "\\%$$</h4>");
                 break;
             case "leq":
                 valueZ = (valueX - valueMu) / valueSigma;
                 res = calculate_from_inf(valueZ);
                 resP = Math.round((res + Number.EPSILON) * 100000) / 100000
                 valueZ = Math.round((valueZ + Number.EPSILON) * 100000) / 100000
-                $('#eq').html("<h5>$$ Z= \\frac{x-\\mu}{\\sigma}  = " + valueZ + " $$</h5><h4>$$P(X\\leq Z) = \\int_{-\\infty}^{" + valueX + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + resP + " = " + Math.round(((res * 100) + Number.EPSILON) * 1000) / 1000 + "\\%$$</h4>");
+                $('#eq').html("<h5>$$ Z= \\frac{x-\\mu}{\\sigma}  = " + valueZ + " $$</h5><h4>$$P(X\\leq Z) = \\int_{-\\infty}^{" + valueZ + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + resP + " = " + Math.round(((res * 100) + Number.EPSILON) * 1000) / 1000 + "\\%$$</h4>");
                 break;
             case "lag":
 
