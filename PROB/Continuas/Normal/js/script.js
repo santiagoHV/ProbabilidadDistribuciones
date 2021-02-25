@@ -111,7 +111,7 @@ function calculate_to_inf(x) {
 }
 
 function calculate_between(a, b) {
-    return simpson(a, b, iteraciones);
+    return simpson(a, b, iteraciones) / (Math.sqrt(2 * Math.PI));
 }
 
 
@@ -122,7 +122,7 @@ function setValues() {
     res = 0;
     $('#eq').hide();
 
-    if ($('#valueMu').val()=="" ||$('#valvalueSigmaueMu').val()=="" || $('#valueX').val()=="") {
+    if ($('#valueMu').val() == "" || $('#valvalueSigmaueMu').val() == "" || $('#valueX').val() == "") {
         alert("Los valores ingresados estan incompletos");
         $('#eq').hide();
     } else if (!(valueSigma > 0)) {
@@ -152,25 +152,25 @@ function setValues() {
                 valueA = parseFloat($('#valueX').val()) - 0.5;
                 valueB = parseFloat($('#valueB').val()) + 0.5;
 
-                if($('#valueB').val()=="") {
+                if ($('#valueB').val() == "") {
 
                     alert("Los valores ingresados estan incompletos");
                     $('#eq').hide();
-                }else if(valueB<valueA){
+                } else if (valueB < valueA) {
 
                     alert("El valor de 'b' debe ser mayor o igual 'a')");
                     $('#eq').hide();
-                }else{
+                } else {
 
                     valueA = parseFloat($('#valueX').val()) - 0.5;
                     valueB = parseFloat($('#valueB').val()) + 0.5;
-    
+
                     valueZ1 = ((valueA - valueMu) / valueSigma)
                     valueZ2 = ((valueB - valueMu) / valueSigma)
-    
+
                     res = calculate_between(valueZ1, valueZ2);
                     res = Math.round((res + Number.EPSILON) * 10000) / 10000
-                    $('#eq').html("<h5>$$ Z_{1} = \\frac{x_{1}-\\mu}{\\sigma}  = " + valueZ1 + "$$</h5><h5>$$  Z_{2}= \\frac{x_{2}-\\mu}{\\sigma}  = " + valueZ2 + " $$</h5><h4>$$P(Z_{1}\\leq X\\leq Z_{2}) = \\int_{" + valueA + "}^{" + valueB + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + res + " = " + Math.round(((res * 100) + Number.EPSILON) * 100) / 100 + "\\%$$</h4>");
+                    $('#eq').html("<h5>$$ Z_{1} = \\frac{x_{1}-\\mu}{\\sigma}  = " + valueZ1 + "$$</h5><h5>$$  Z_{2}= \\frac{x_{2}-\\mu}{\\sigma}  = " + valueZ2 + " $$</h5><h4>$$P(Z_{1}\\leq X\\leq Z_{2}) = \\int_{" + valueZ1 + "}^{" + valueZ2 + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + res + " = " + Math.round(((res * 100) + Number.EPSILON) * 100) / 100 + "\\%$$</h4>");
                     break;
                 }
 
