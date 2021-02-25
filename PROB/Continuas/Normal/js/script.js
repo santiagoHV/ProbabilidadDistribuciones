@@ -149,8 +149,8 @@ function setValues() {
                 break;
             case "lag":
 
-                valueA = parseFloat($('#valueX').val()) - 0.5;
-                valueB = parseFloat($('#valueB').val()) + 0.5;
+                valueA = parseFloat($('#valueX').val()) ;
+                valueB = parseFloat($('#valueB').val()) ;
 
                 if ($('#valueB').val() == "") {
 
@@ -162,8 +162,8 @@ function setValues() {
                     $('#eq').hide();
                 } else {
 
-                    valueA = parseFloat($('#valueX').val()) - 0.5;
-                    valueB = parseFloat($('#valueB').val()) + 0.5;
+                    valueA -= 0.5;
+                    valueB += 0.5;
 
                     valueZ1 = ((valueA - valueMu) / valueSigma)
                     valueZ2 = ((valueB - valueMu) / valueSigma)
