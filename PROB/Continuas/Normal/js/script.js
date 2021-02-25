@@ -5,7 +5,11 @@ var valueSigma;
 var valueX;
 var valueZ;
 var res;
-var opsList = ["eq", "geq", "leq"];
+var opsList = ["eq", "geq", "leq", "lag"];
+
+const iteraciones = 10000
+
+$('#aditional').hide();
 
 $('#eqGuide').hide();
 $('#geqGuide').hide();
@@ -14,7 +18,7 @@ $('#lessGuide').hide();
 $('#moreGuide').hide();
 showGuide();
 
-;
+
 
 function f1(z) {
     //console.log("z en f1 = =" + z);
@@ -75,24 +79,26 @@ function riman2(a, b, n) {
 function calculate_from_inf(x) {
     if (x < 0) {
 
-        var rimanRes = riman(1 / x, 0, 10);
+        var rimanRes = riman(1 / x, 0, iteraciones);
 
         console.log("riman = " + rimanRes);
-        return rimanRes / (Math.sqrt(2 * Math.PI));
-    } else if (x == 0) {
-        cut = - 2;
 
-        var rimanRes = riman(1 / cut, 0, 10);
-        var rimanRes2 = riman2(cut, x, 10);
+        return rimanRes / (Math.sqrt(2 * Math.PI));
+
+    } else if (x == 0) {
+        cut = -2;
+
+        var rimanRes = riman(1 / cut, 0, iteraciones);
+        var rimanRes2 = riman2(cut, x, iteraciones);
 
         console.log("riman = " + rimanRes + " riman2=" + rimanRes2);
 
         return (rimanRes + rimanRes2) / (Math.sqrt(2 * Math.PI));
     } else {
-        cut = - Math.abs(x) / 2;
+        cut = -Math.abs(x) / 2; //negativo aleatorio
 
-        var rimanRes = riman(1 / cut, 0, 10);
-        var simpsonRes = simpson(cut, x, 10);
+        var rimanRes = riman(1 / cut, 0, iteraciones);
+        var simpsonRes = simpson(cut, x, iteraciones);
 
         console.log("riman = " + rimanRes + " simpson=" + simpsonRes);
 
@@ -101,7 +107,11 @@ function calculate_from_inf(x) {
 }
 
 function calculate_to_inf(x) {
-    return 1 -calculate_from_inf(x);
+    return 1 - calculate_from_inf(x);
+}
+
+function calculate_between(a, b) {
+    return simpson(a, b, iteraciones);
 }
 
 
@@ -119,18 +129,37 @@ function setValues() {
         alert("Sigma debe ser mayor a 0");
         $('#eq').hide();
     } else {
-        valueZ = (valueX - valueMu) / valueSigma;
+        //proceso
+
+
         switch ($('#valueOperator').val()) {
             case "geq":
-                res += calculate_to_inf(valueZ);
+                valueX = valueX - 0.5
+                valueZ = (valueX - valueMu) / valueSigma;
+                res = calculate_to_inf(valueZ);
                 res = Math.round((res + Number.EPSILON) * 1000) / 1000
                 $('#eq').html("<h5>$$ Z= \\frac{x-\\mu}{\\sigma}  = " + valueZ + " $$</h5><h4>$$P(X\\geq Z) = \\int_{" + valueX + "}^{\\infty} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dx  = " + res + " = " + Math.round(((res * 100) + Number.EPSILON) * 100) / 100 + "\\%$$</h4>");
                 break;
             case "leq":
-                res += calculate_from_inf(valueZ);
+                valueX + 0.5
+                valueZ = (valueX - valueMu) / valueSigma;
+                res = calculate_from_inf(valueZ);
                 res = Math.round((res + Number.EPSILON) * 1000) / 1000
                 $('#eq').html("<h5>$$ Z= \\frac{x-\\mu}{\\sigma}  = " + valueZ + " $$</h5><h4>$$P(X\\leq Z) = \\int_{-\\infty}^{" + valueX + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + res + " = " + Math.round(((res * 100) + Number.EPSILON) * 100) / 100 + "\\%$$</h4>");
                 break;
+            case "lag":
+
+                valueA = parseFloat($('#valueX').val()) - 0.5;
+                valueB = parseFloat($('#valueB').val()) + 0.5;
+
+                valueZ1 = ((valueA - valueMu) / valueSigma)
+                valueZ2 = ((valueB - valueMu) / valueSigma)
+
+                res = calculate_between(valueZ1, valueZ2);
+                res = Math.round((res + Number.EPSILON) * 1000) / 1000
+                $('#eq').html("<h5>$$ Z_{1} = \\frac{x_{1}-\\mu}{\\sigma}  = " + valueZ1 + "$$</h5><h5>$$  Z_{2}= \\frac{x_{2}-\\mu}{\\sigma}  = " + valueZ2 + " $$</h5><h4>$$P(Z_{1}\\leq X\\leq Z_{2}) = \\int_{" + valueA + "}^{" + valueB + "} \\frac{1}{ \\sqrt{2\\pi}} e^{- \\frac{1}{2} z^2} dz  = " + res + " = " + Math.round(((res * 100) + Number.EPSILON) * 100) / 100 + "\\%$$</h4>");
+                break;
+
             default:
                 res = 0;
                 break;
@@ -150,6 +179,13 @@ function showGuide() {
             $('#' + opsList[i] + 'Guide').hide();
             //alert("Hide "+opsList[i]+"Ans ");
         }
+    }
+    if ($('#valueOperator').val() == 'lag') {
+        $('#aditional').show();
+        $('#labelX').html("\(a \)");
+    } else {
+        $('#aditional').hide();
+        $('#labelX').html("$$ x $$");
     }
 }
 
@@ -184,16 +220,3 @@ function printgraph() {
     pieSeries.hiddenState.properties.endAngle = -90;
     pieSeries.hiddenState.properties.startAngle = -90;
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
