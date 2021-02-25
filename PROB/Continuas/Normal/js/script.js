@@ -86,16 +86,9 @@ function calculate_from_inf(x) {
         return rimanRes / (Math.sqrt(2 * Math.PI));
 
     } else if (x == 0) {
-        cut = -2;
-
-        var rimanRes = riman(1 / cut, 0, iteraciones);
-        var rimanRes2 = riman2(cut, x, iteraciones);
-
-        console.log("riman = " + rimanRes + " riman2=" + rimanRes2);
-
-        return (rimanRes + rimanRes2) / (Math.sqrt(2 * Math.PI));
+        return 0.5;
     } else {
-        cut = -Math.abs(x) / 2; //negativo aleatorio
+        cut = -2; //negativo aleatorio
 
         var rimanRes = riman(1 / cut, 0, iteraciones);
         var simpsonRes = simpson(cut, x, iteraciones);
